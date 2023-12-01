@@ -5,7 +5,16 @@ const userSchema = new  mongoose.Schema({
     name:
     {
         type:String,
+    },
+    faculty :
+    {
+        type: String,
+    },
+    gpa :
+    {
+        type: String,
     }
+
     
 });
 
