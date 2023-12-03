@@ -8,32 +8,45 @@
 </head>
 <body>
     <form method="POST" action="/">
-        <h1>Student Mark Sheet</h1>
-        <br>
-        <label>Name:</label>
-        <br>
-        <input type="text" name="name" id="name"> 
-        <br>
-        <br>
-        <label>Faculty:</label>
-        <br>
-        <input type="text" name="faculty" id ="faculty">
-        <br>
-        <br>
-        <label>GPA: </label>
-        <br>
-        <input type ="text" name="gpa" id="gpa">
-        <br>
-        <br>
-        <button> Submit</button>
-
+      <h1>Student Mark Sheet</h1>
+      <br>
+      <label>Name:</label>
+      <br>
+      <input type="text" name="name" id="name" required> 
+      <br>
+      <br>
+      <label>Faculty:</label>
+      <br>
+      <input type="text" name="faculty" id ="faculty" required> 
+      <br>
+      <br>
+      <label>GPA: </label>
+      <br>
+      <input type ="text" name="gpa" id="gpa" required> 
+      <br>
+      <br>
+      <button onclick="validateForm()">Submit</button>
     </form>
 
 
-    <!-- for result display -->
-    <h1>User Data</h1>
-
-  
+    
+        <!-- for result display -->
+        <!-- Latest Code -->
+        <h1>User Data</h1>
+        <ul>
+            <% studentResults.forEach(user => { %>
+                <li>
+                    <strong>Name:</strong> <%= user.name %>, 
+                    <strong>Faculty:</strong> <%= user.faculty %>, 
+                    <strong>GPA:</strong> <%= user.gpa %>
+                </li>
+                <% }); %>
+            </ul>
+        
+        <!-- The issue in your code is you're iterating through studentResults in your EJS file. When iterating, you're attempting to access properties like name, faculty, and gpa incorrectly. It should be accessed as properties of each individual user object in the studentResults array. -->
+        
+        <!-- Previous code -->
+        <!-- <h1>User Data</h1>
         <ul>
             <% studentResults.forEach(user => { %>
                 <li>
@@ -42,8 +55,20 @@
                     <strong>GPA:</strong> <%= studentResults.gpa %>
                 </li>
             <% }); %>
-        </ul>
+        </ul> -->
   
-
-</body>
+    <!-- Validation code for input fields -->
+    <script>
+      function validateForm() {
+        const name = document.getElementById('name').value;
+        const faculty = document.getElementById('faculty').value;
+        const gpa = document.getElementById('gpa').value;
+  
+        if (name === '' || faculty === '' || gpa === '') {
+          alert('All fields are mandatory.');
+          event.preventDefault(); // these line helps to submit the data again and again without refreshing the page/browser
+        }
+      }
+    </script>
+  </body>
 </html>
